@@ -1,0 +1,48 @@
+<h2>Login Details</h2>
+<div class="row mt-4 ml-2">
+  <form #f="ngForm" class="w-75" (ngSubmit)="handleLogin(f.value)">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        #email="ngModel"
+        ngModel
+        name="email"
+        required
+        id="email"
+        class="form-control"
+      />
+      <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+        Email is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        #password="ngModel"
+        ngModel
+        name="password"
+        id="password"
+        required
+        class="form-control"
+      />
+      <div
+        *ngIf="password.touched && password.invalid"
+        class="alert alert-danger"
+      >
+        Password is required
+      </div>
+    </div>
+
+    <div
+      class="d-flex flex-column align-items-center justify-content-center pt-4"
+    >
+      <p my-4 *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <button [disabled]="!f.valid" class="btn btn-primary">Login</button>
+      <a routerLink="/signup" class="py-2"
+        >Don't have an Account , click here!
+      </a>
+    </div>
+  </form>
+</div>

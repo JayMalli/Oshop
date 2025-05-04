@@ -1,0 +1,36 @@
+<h1>My orders</h1>
+<ng-container>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Address</th>
+        <th>Products</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of ordersDetails | async">
+        <td *ngIf="order.address">
+          <div class="address-box">
+            <p>{{ order.address.name }}</p>
+            <p>
+              {{ order.address.addline1 }} , {{ order.address.addline2 }} ,
+              {{ order.address.city }}
+            </p>
+          </div>
+        </td>
+        <td *ngIf="order.products">
+          <div *ngFor="let p of order.products">
+            <p>{{ p.quantity }} x {{ p.title }}</p>
+          </div>
+          <div *ngIf="order.totalAmount">
+            <p>total price: {{ order.totalAmount | currency : "USD" }}</p>
+          </div>
+        </td>
+        <td *ngIf="order.status" class="d-flex align-items-center">
+          <span class="badge badge-primary">{{ order.status }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

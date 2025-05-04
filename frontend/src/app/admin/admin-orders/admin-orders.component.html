@@ -1,0 +1,89 @@
+<div class="d-flex w-100 justify-content-between align-items-center">
+  <h1>Orders</h1>
+</div>
+
+<ng-container>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Order</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of ordersData | async">
+        <td *ngIf="order.userId">
+          {{ order.userId }}
+        </td>
+        <table>
+          <thead>
+            <tr>
+              <th>Address</th>
+              <th>Products</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let singleOrder of order.orders; let i = index">
+              <td>
+                <div class="address-box">
+                  <p>{{ singleOrder.address.name }} ,</p>
+                  <p>
+                    {{ singleOrder.address.addline1 }} ,
+
+                    {{ singleOrder.address.addline2 }}
+                  </p>
+                  <p>
+                    {{ singleOrder.address.city }}
+                  </p>
+                </div>
+              </td>
+              <td *ngIf="singleOrder.products">
+                <div *ngFor="let p of singleOrder.products; let i = index">
+                  <p>{{ p.quantity }} x {{ p.title }}</p>
+                </div>
+              </td>
+              <td *ngIf="singleOrder.totalAmount">
+                <p>
+                  {{ singleOrder.totalAmount | currency : "USD" }}
+                </p>
+              </td>
+              <td *ngIf="singleOrder.status">
+                <select
+                  *ngIf="singleOrder.status"
+                  id="select-type-basic"
+                  class="custom-select"
+                  #selectedValue
+                  (change)="
+                    handleChange(
+                      selectedValue.value,
+                      order.userId,
+                      singleOrder.orderId
+                    )
+                  "
+                >
+                  <option
+                    value="{{ singleOrder.status }}"
+                    [selected]="singleOrder.status == 'IN PROGRESS'"
+                  >
+                    {{ singleOrder.status }}
+                  </option>
+                  <option value="Placed" *ngIf="singleOrder.status != 'Placed'">
+                    Placed
+                  </option>
+                  <option *ngIf="singleOrder.status != 'Dispatch'">
+                    Dispatch
+                  </option>
+                  <option *ngIf="singleOrder.status != 'Delivered'">
+                    Delivered
+                  </option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

@@ -1,0 +1,45 @@
+<div class="card" style="width: 18rem; margin: auto; margin-bottom: 2rem">
+  <img
+    class="card-img-top"
+    [src]="product.imgURL"
+    alt="Card image cap"
+    style="height: 10rem; object-fit: cover"
+  />
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">{{ product.price | currency : "USD" }}</p>
+  </div>
+  <div *ngIf="showActions" class="card-footer">
+    <ng-template #updateQuantity>
+      <button class="btn btn-primary btn-block" (click)="addToCart(product)">
+        Add to Cart
+      </button>
+    </ng-template>
+    <div
+      class="row no-gutters"
+      *ngIf="quantuty | async as qua; else updateQuantity"
+    >
+      <div class="col-2">
+        <button
+          class="btn btn-secondary btn-block"
+          (click)="addToCart(product, 'decrement')"
+        >
+          -
+        </button>
+      </div>
+      <div
+        class="col text-center d-flex justify-content-center align-items-center"
+      >
+        {{ qua }} in cart
+      </div>
+      <div class="col-2">
+        <button
+          class="btn btn-secondary btn-block"
+          (click)="addToCart(product, 'increment')"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

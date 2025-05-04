@@ -1,0 +1,27 @@
+<p>
+  <a routerLink="new" class="btn btn-primary">New Product</a>
+</p>
+
+<table
+  datatable
+  [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger"
+  class="table row-border hover"
+>
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of filteredProducts$ | async">
+      <td>{{ p.title }}</td>
+      <td>{{ p.price }}</td>
+      <td>
+        <a [routerLink]="['/admin/products/', p.productId]">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

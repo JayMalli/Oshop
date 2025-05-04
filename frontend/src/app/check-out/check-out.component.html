@@ -1,0 +1,105 @@
+<h2>Shoppoing</h2>
+<div class="row">
+  <div class="col-6">
+    <form class="w-100" #f="ngForm" (ngSubmit)="save(f.value)">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          required
+          #name="ngModel"
+          ngModel
+          [(ngModel)]="address.name"
+          name="name"
+          type="text"
+          id="name"
+          class="form-control"
+        />
+        <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+          Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Address Line-1</label>
+        <input
+          required
+          #addline1="ngModel"
+          ngModel
+          [(ngModel)]="address.addline1"
+          name="addline1"
+          type="text"
+          id="addline1"
+          class="form-control"
+        />
+        <div
+          *ngIf="addline1.touched && addline1.invalid"
+          class="alert alert-danger"
+        >
+          Address Line-1 is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">Address Line-2</label>
+        <input
+          required
+          #addline2="ngModel"
+          ngModel
+          [(ngModel)]="address.addline2"
+          name="addline2"
+          type="text"
+          id="addline2"
+          class="form-control"
+        />
+        <div
+          *ngIf="addline2.touched && addline2.invalid"
+          class="alert alert-danger"
+        >
+          Address Line-2 is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="name">City</label>
+        <input
+          required
+          #city="ngModel"
+          ngModel
+          [(ngModel)]="address.city"
+          name="city"
+          type="text"
+          id="city"
+          class="form-control"
+        />
+        <div *ngIf="city.touched && city.invalid" class="alert alert-danger">
+          City is required
+        </div>
+      </div>
+
+      <button class="btn btn-primary mr-4" [disabled]="!f.valid">
+        Place Order
+      </button>
+    </form>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Order Summary</h4>
+        <p class="card-text">
+          You have {{ quantity | async }} items in you shopping cart
+        </p>
+        <ul class="list-group">
+          <li *ngFor="let item of cartProducts | async" class="list-group-item">
+            {{ item.quantity }} x {{ item.title }}
+            <div class="float-right">
+              {{ +item.price * item.quantity | currency : "USD" }}
+            </div>
+          </li>
+          <li class="list-group-item">
+            Total
+            <div class="float-right">
+              {{ totalAmount | async | currency : "USD" }}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

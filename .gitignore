@@ -1,0 +1,70 @@
+# Ignore node_modules and dependencies
+node_modules/
+yarn-error.log
+
+# Angular specific
+.angular/
+.cache/
+
+# Build outputs
+dist/
+build/
+
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore .NET build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuget/
+
+# Ignore generated files
+project.lock.json
+project.fragment.lock.json
+*.props
+*.targets
+
+# Ignore coverage reports
+coverage/
+*.coverage
+*.coveragexml
+*.codecov
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.cache
+*.pid
+*.seed
+*.pid.lock
+
+# Ignore deployment files
+*.publish/
+*.deploy/
+
+# Ignore Firebase specific
+firebase-debug.log
+.firebaserc
